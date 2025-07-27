@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Users } from "lucide-react"
+import { Users, Trophy, Zap } from "lucide-react"
 import { useLocalization } from "./localization-provider"
 
 const prizes = [
@@ -76,51 +76,160 @@ const baseUsernames = [
 export default function LiveWinnersTicker() {
   const { t } = useLocalization()
   const [currentWinner, setCurrentWinner] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
 
   // Generate fake winners with translated "won" text
   const fakeWinners = baseUsernames.map((username) => {
     const randomPrize = prizes[Math.floor(Math.random() * prizes.length)].amount
-    return `${username} ${t.won} ${randomPrize} R$! 🎉`
+    return {
+      username,
+      amount: randomPrize,
+      text: `${username} ${t.won} ${randomPrize} R$! 🎉`,
+    }
   })
 
-  // Winners ticker logic
+  // Winners ticker logic with enhanced timing
   useEffect(() => {
-    // Ensure fakeWinners has elements before starting the interval
     if (fakeWinners.length === 0) {
       console.warn("fakeWinners array is empty, ticker will not update.")
       return
     }
 
     const interval = setInterval(() => {
-      setCurrentWinner((prev) => (prev + 1) % fakeWinners.length)
-    }, 2000)
+      setIsVisible(false)
+      setTimeout(() => {
+        setCurrentWinner((prev) => (prev + 1) % fakeWinners.length)
+        setIsVisible(true)
+      }, 200) // Brief pause for smooth transition
+    }, 3000) // Longer display time
 
     return () => clearInterval(interval)
   }, [fakeWinners.length, t.won])
 
+  if (fakeWinners.length === 0) return null
+
+  const currentWinnerData = fakeWinners[currentWinner]
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-4 left-0 right-0 mx-auto z-50 trust-card p-4 px-6 max-w-md"
+      initial={{ opacity: 0, y: 100, scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 200, delay: 1 }}
+      className="fixed bottom-4 left-0 right-0 mx-auto z-50 max-w-md"
     >
-      <div className="flex items-center justify-center gap-4 text-blue-600">
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}>
-          <Users className="w-7 h-7" />
-        </motion.div>
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={currentWinner}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.3 }}
-            className="text-xl font-bold flex-1 text-center"
+      <motion.div
+        className="trust-card p-4 px-6 mx-4 relative overflow-hidden backdrop-blur-sm"
+        animate={{
+          scale: [1, 1.02, 1],
+          boxShadow: ["0 10px 30px rgba(0,0,0,0.2)", "0 15px 40px rgba(34,197,94,0.3)", "0 10px 30px rgba(0,0,0,0.2)"],
+        }}
+        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+        whileHover={{ scale: 1.05, y: -2 }}
+      >
+        {/* Background shine effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-green-200 to-transparent opacity-10"
+          animate={{
+            x: ["-100%", "100%"],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatDelay: 2,
+          }}
+        />
+
+        <div className="flex items-center justify-center gap-3 relative z-10">
+          {/* Animated icon */}
+          <motion.div
+            className="flex items-center gap-1"
+            animate={{
+              rotate: [0, 5, -5, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
           >
-            {fakeWinners[currentWinner]}
-          </motion.span>
-        </AnimatePresence>
-      </div>
+            <Trophy className="w-6 h-6 text-yellow-500" />
+            <Users className="w-6 h-6" />
+          </motion.div>
+
+          {/* Winner text with enhanced animations */}
+          <div className="flex-1 text-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentWinner}
+                initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                animate={{
+                  opacity: isVisible ? 1 : 0,
+                  x: 0,
+                  scale: 1,
+                }}
+                exit={{ opacity: 0, x: -50, scale: 0.9 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25,
+                  duration: 0.4,
+                }}
+                className="font-bold text-lg"
+              >
+                <motion.span
+                  className="text-gray-800"
+                  animate={{
+                    color: ["#1d4ed8", "#059669", "#dc2626", "#1d4ed8"],
+                  }}
+                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                >
+                  {currentWinnerData.username}
+                </motion.span>
+                <span className="text-gray-700"> {t.won} </span>
+                <motion.span
+                  className="text-green-600 font-black"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    textShadow: [
+                      "0 0 5px rgba(34,197,94,0.3)",
+                      "0 0 10px rgba(34,197,94,0.6)",
+                      "0 0 5px rgba(34,197,94,0.3)",
+                    ],
+                  }}
+                  transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                >
+                  {currentWinnerData.amount} R$!
+                </motion.span>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Animated sparkle */}
+          <motion.div
+            animate={{
+              rotate: 360,
+              scale: [0.8, 1.2, 0.8],
+            }}
+            transition={{
+              rotate: { duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+              scale: { duration: 2, repeat: Number.POSITIVE_INFINITY },
+            }}
+          >
+            <Zap className="w-5 h-5 text-yellow-400" />
+          </motion.div>
+        </div>
+
+        {/* Live indicator */}
+        <motion.div
+          className="absolute top-2 right-2 flex items-center gap-1"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+        >
+          <div className="w-2 h-2 bg-red-500 rounded-full" />
+          <span className="text-xs text-gray-800 font-semibold">LIVE</span>
+        </motion.div>
+      </motion.div>
     </motion.div>
   )
 }

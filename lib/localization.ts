@@ -120,7 +120,7 @@ export const translations: Record<string, Translations> = {
     chooseBox: "Choose a Box! ✨",
 
     // Gift Card Claim Page
-    youWonGiftcard: "YOU WON 750$ GIFTCARD!",
+    youWonGiftcard: "$750 GIFTCARD!",
     claimIn: "Claim in",
     odds: "Odds:",
     timesUp: "Time's up! ⏰ You missed your chance. 😔",
@@ -193,7 +193,7 @@ export const translations: Record<string, Translations> = {
     chooseBox: "¡Elige una Caja! ✨",
 
     // Gift Card Claim Page
-    youWonGiftcard: "¡GANASTE TARJETA REGALO DE $750!",
+    youWonGiftcard: "¡TARJETA REGALO DE $750!",
     claimIn: "Reclamar en",
     odds: "Probabilidades:",
     timesUp: "¡Se acabó el tiempo! ⏰ Perdiste tu oportunidad. 😔",
@@ -261,7 +261,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "CHOISISSEZ VOTRE PRIX! 👇",
     chooseBox: "Choisissez une Boîte! ✨",
 
-    youWonGiftcard: "VOUS AVEZ GAGNÉ UNE CARTE CADEAU DE 750$!",
+    youWonGiftcard: "CARTE CADEAU DE 750$!",
     claimIn: "Réclamer dans",
     odds: "Chances:",
     timesUp: "Temps écoulé! ⏰ Vous avez raté votre chance. 😔",
@@ -325,7 +325,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "WÄHLEN SIE IHREN PREIS! 👇",
     chooseBox: "Wählen Sie eine Box! ✨",
 
-    youWonGiftcard: "SIE HABEN EINE 750$ GESCHENKKARTE GEWONNEN!",
+    youWonGiftcard: "750$ GESCHENKKARTE!",
     claimIn: "Beanspruchen in",
     odds: "Chancen:",
     timesUp: "Zeit ist um! ⏰ Sie haben Ihre Chance verpasst. 😔",
@@ -389,7 +389,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "ESCOLHA SEU PRÊMIO! 👇",
     chooseBox: "Escolha uma Caixa! ✨",
 
-    youWonGiftcard: "VOCÊ GANHOU UM CARTÃO PRESENTE DE $750!",
+    youWonGiftcard: "CARTÃO PRESENTE DE $750!",
     claimIn: "Reivindicar em",
     odds: "Chances:",
     timesUp: "Tempo esgotado! ⏰ Você perdeu sua chance. 😔",
@@ -453,7 +453,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "ВЫБЕРИТЕ ВАШ ПРИЗ! 👇",
     chooseBox: "Выберите Коробку! ✨",
 
-    youWonGiftcard: "ВЫ ВЫИГРАЛИ ПОДАРОЧНУЮ КАРТУ НА $750!",
+    youWonGiftcard: "ПОДАРОЧНУЮ КАРТУ НА $750!",
     claimIn: "Получить через",
     odds: "Шансы:",
     timesUp: "Время вышло! ⏰ Вы упустили свой шанс. 😔",
@@ -517,7 +517,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "SCEGLI IL TUO PREMIO! 👇",
     chooseBox: "Scegli una Scatola! ✨",
 
-    youWonGiftcard: "HAI VINTO UNA CARTA REGALO DA $750!",
+    youWonGiftcard: "CARTA REGALO DA $750!",
     claimIn: "Riscatta in",
     odds: "Probabilità:",
     timesUp: "Tempo scaduto! ⏰ Hai perso la tua occasione. 😔",
@@ -581,7 +581,7 @@ export const translations: Record<string, Translations> = {
     pickYourPrize: "KIES JE PRIJS! 👇",
     chooseBox: "Kies een Doos! ✨",
 
-    youWonGiftcard: "JE HEBT EEN $750 CADEAUKAART GEWONNEN!",
+    youWonGiftcard: "$750 CADEAUKAART!",
     claimIn: "Claim in",
     odds: "Kansen:",
     timesUp: "Tijd is om! ⏰ Je hebt je kans gemist. 😔",

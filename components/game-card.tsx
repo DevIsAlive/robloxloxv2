@@ -15,7 +15,7 @@ interface GameCardProps {
 
 export function GameCard({ title, description, players, rating, imageUrl, onPlay }: GameCardProps) {
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card className="">
       <CardHeader>
         <div className="aspect-video bg-gradient-to-br from-blue-400 to-purple-500 rounded-md mb-2 flex items-center justify-center">
           {imageUrl ? (

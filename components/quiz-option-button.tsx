@@ -19,12 +19,8 @@ export default function QuizOptionButton({ option, index, selectedAnswer, onSele
       onClick={() => onSelect(index)}
       disabled={isDisabled}
       className={`w-full trust-card py-5 px-4 transition-all duration-300 relative overflow-hidden ${
-        isSelected ? "bg-blue-100 border-blue-700 shadow-xl" : "hover:bg-blue-50"
+        isSelected ? "bg-blue-100 border-blue-700 shadow-xl" : ""
       } ${isDisabled && !isSelected ? "opacity-50" : ""}`}
-      whileHover={{
-        scale: isDisabled ? 1 : 1.03,
-        boxShadow: isDisabled ? undefined : "0 8px 25px rgba(59,130,246,0.3)",
-      }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0, scale: isSelected ? 1.02 : 1 }}
